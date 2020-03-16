@@ -1,0 +1,59 @@
+.rightButtons {
+    float: right;
+}
+
+.container {
+	display: flex;
+	justify-content: space-between;
+	align-content: space-between;
+	flex-direction: row;
+	align-items: center;
+	width: 100%;
+}
+
+.rightContainer {
+	display: flex;
+	flex-direction: row;
+	margin-right: 100px;
+}
+
+.rightContainer > * {
+	margin-left: 35px !important;
+}
+
+.cardActionsContainer{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	
+}
+
+.linkStyle {
+	text-decoration: none;
+	color: white;
+	margin-left: 100px;
+	cursor: pointer;
+	font-size: 22px;
+}
+
+.footer {
+	font-size: 22px;
+	margin-left: 100px;
+}
+
+@media only screen and (max-width: 680px){
+	.linkStyle{
+		font-size: 17px;
+		margin-left: 20px
+	}
+	.rightContainer {
+		margin-right: 20px;
+	}
+	.rightContainer > * {
+		margin-left: 15px !important;
+	}
+	.footer {
+		margin-left: 20px;
+	}
+}
+

@@ -1,0 +1,6 @@
+export const LIKE_CAR = "LIKE CAR";
+
+export const DISLIKE_CAR = "DISLIKE_CAR"
+
+export const LIKE_ACTION_SUCCESS = "LIKE ACTION SUCCESS";
+export const LIKE_ACTION_FAIL = "LIKE ACTION FAIL"
