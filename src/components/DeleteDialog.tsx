@@ -1,17 +1,17 @@
 import React from 'react'
-import {  Button, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from '@material-ui/core';
-import {useDispatch, useSelector} from 'react-redux';
-import {rootState} from '../store/reducers/rootReducer';
+import { Button, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { rootState } from '../store/reducers/rootReducer';
 import * as userActions from '../store/actions/userActions';
 import * as carActions from '../store/actions/carActions';
 
 export const DeleteDialog = () => {
 
-	const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-	const {showDeleteModal, selectedId} = useSelector((state:rootState) => state.cars);
+    const { showDeleteModal, selectedId } = useSelector((state: rootState) => state.cars);
 
-	 const closeHandle =  () => {
+    const closeHandle = () => {
         dispatch(userActions.closeModal());
     }
 
@@ -20,8 +20,8 @@ export const DeleteDialog = () => {
         dispatch(userActions.closeModal());
     }
 
-	return (
-		 <Dialog onClose={closeHandle} open={showDeleteModal}>
+    return (
+        <Dialog onClose={closeHandle} open={showDeleteModal}>
             <DialogTitle>Notice</DialogTitle>
             <DialogContent>
                 <DialogContentText>
@@ -33,5 +33,5 @@ export const DeleteDialog = () => {
                 <Button onClick={sendForDeletion} color="primary">Yes</Button>
             </DialogActions>
         </Dialog>
-	)
+    )
 }

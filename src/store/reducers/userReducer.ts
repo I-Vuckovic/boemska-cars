@@ -1,6 +1,6 @@
 import { Action } from "redux";
 import * as userActions from '../actionTypes/userActionTypes';
-import {requestFailed} from '../actions/userActions';
+import { requestFailed } from '../actions/userActions';
 
 export interface UserState {
 	proccessing: boolean,
@@ -9,17 +9,17 @@ export interface UserState {
 	errorMessage: string
 }
 
-const initialState : UserState = {
+const initialState: UserState = {
 	proccessing: false,
 	error: false,
 	showModal: false,
 	errorMessage: ''
 }
 
-export const userReducer = (state = initialState, action : Action) => {
+export const userReducer = (state = initialState, action: Action) => {
 
-	switch(action.type) {
-		case userActions.LOG_IN_REQUEST : case userActions.REGISTER_REQUEST: {
+	switch (action.type) {
+		case userActions.LOG_IN_REQUEST: case userActions.REGISTER_REQUEST: {
 
 			return {
 				...state,
@@ -52,7 +52,7 @@ export const userReducer = (state = initialState, action : Action) => {
 		// }
 
 		case userActions.REQUEST_FAILED: {
-			const {errorMessage} = action as requestFailed;
+			const { errorMessage } = action as requestFailed;
 
 			return {
 				...state,

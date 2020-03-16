@@ -1,15 +1,15 @@
 import React from 'react'
-import {useDispatch, useSelector} from 'react-redux';
-import {  Button, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from '@material-ui/core';
 import * as userActions from '../store/actions/userActions';
-import {rootState} from '../store/reducers/rootReducer';
+import { rootState } from '../store/reducers/rootReducer';
 
-export const RegisterDialog = () =>  {
+export const RegisterDialog = () => {
 
-    const showModal = useSelector((state : rootState) => state.user.showModal);
+    const showModal = useSelector((state: rootState) => state.user.showModal);
     const dispatch = useDispatch();
 
-    const closeHandle =  () => {
+    const closeHandle = () => {
         dispatch(userActions.closeModal());
     }
 

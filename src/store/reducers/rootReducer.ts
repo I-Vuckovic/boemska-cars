@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import { userReducer, UserState } from './userReducer';
 import { connectRouter } from 'connected-react-router';
-import carReducer, {CarState} from "./carReducer";
+import carReducer, { CarState } from "./carReducer";
 
 export interface rootState {
 	user: UserState,

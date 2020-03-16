@@ -1,25 +1,25 @@
-import {Action} from 'redux'
+import { Action } from 'redux'
 import * as userActions from '../actions/userActions';
-import {takeEvery, call, put} from 'redux-saga/effects'
+import { takeEvery, call, put } from 'redux-saga/effects'
 import * as userActionTypes from '../actionTypes/userActionTypes';
-import {UserLogin} from '../../models/User';
+import { UserLogin } from '../../models/User';
 import * as userService from '../../services/userService';
-import {push} from 'connected-react-router';
+import { push } from 'connected-react-router';
 
-function *onPageLoad(action : userActions.onPageLoad){
-	const {path} = action;
+function* onPageLoad(action: userActions.onPageLoad) {
+	const { path } = action;
 
-	if (path !== '/login' && localStorage.getItem('access_token') === null){
+	if (path !== '/login' && localStorage.getItem('access_token') === null) {
 		yield put(push('/login'))
 	}
 }
 
-function *login(action : userActions.loginRequest) {
-	const {credentials} = action;
+function* login(action: userActions.loginRequest) {
+	const { credentials } = action;
 
 	console.log(credentials);
 
-	const userLogin : UserLogin = {
+	const userLogin: UserLogin = {
 		client_id: 'test',
 		client_secret: 'secret',
 		grant_type: 'password',
@@ -43,30 +43,30 @@ function *login(action : userActions.loginRequest) {
 	}
 }
 
-function *registerUser(action : userActions.registerUser) {
+function* registerUser(action: userActions.registerUser) {
 
 	try {
-			const {user} = action;
+		const { user } = action;
 
-			const response = yield call(userService.userRegister, user);
+		const response = yield call(userService.userRegister, user);
 
-			console.log(response);
+		console.log(response);
 
-			if (response && response.status === 200) {
+		if (response && response.status === 200) {
 
-				yield put(userActions.registerUserSuccess());
-			}
-			else {
-				yield put(userActions.requestFailed("Could not register a new account, either the username is taken or the server is down"));
-			}
+			yield put(userActions.registerUserSuccess());
+		}
+		else {
+			yield put(userActions.requestFailed("Could not register a new account, either the username is taken or the server is down"));
+		}
 	}
-	catch(error){
+	catch (error) {
 		console.log(error);
 	}
 
 }
 
-export function *userSaga(){
+export function* userSaga() {
 	console.log('user saga radi');
 
 	yield takeEvery(userActionTypes.ON_PAGE_LOAD, onPageLoad);

@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { rootSaga } from './saga/rootSaga';
 import { routerMiddleware } from 'connected-react-router'
 
-import {createBrowserHistory} from 'history';
+import { createBrowserHistory } from 'history';
 
 export const history = createBrowserHistory();
 

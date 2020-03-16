@@ -4,7 +4,7 @@ import * as carActionTypes from '../actionTypes/carActionTypes';
 import * as carActions from '../actions/carActions';
 import * as likeActionTypes from '../actionTypes/likingActionTypes';
 import * as likeActions from '../actions/likingActions';
-import {CLOSE_MODAL} from '../actionTypes/userActionTypes';
+import { CLOSE_MODAL } from '../actionTypes/userActionTypes';
 
 export interface CarState {
     cars: Car[],
@@ -38,9 +38,9 @@ const carReducer = (state = initialState, action: Action) => {
             }
         }
 
-        case carActionTypes.FETCH_CARS_SUCCESS:{
+        case carActionTypes.FETCH_CARS_SUCCESS: {
 
-            const {cars} = action as carActions.fetchCarsSuccess;
+            const { cars } = action as carActions.fetchCarsSuccess;
 
             return {
                 ...state,
@@ -68,11 +68,11 @@ const carReducer = (state = initialState, action: Action) => {
         }
 
         case carActionTypes.ADD_NEW_CAR_SUCCESS: {
-            const {car} = action as carActions.addCarSuccess;
+            const { car } = action as carActions.addCarSuccess;
 
             return {
                 ...state,
-                loading:false,
+                loading: false,
                 addError: false,
                 cars: [...state.cars, car]
             }
@@ -87,8 +87,8 @@ const carReducer = (state = initialState, action: Action) => {
             }
         }
 
-        case carActionTypes.DELETE_CAR : {
-            const {id} = action as carActions.deleteCar;
+        case carActionTypes.DELETE_CAR: {
+            const { id } = action as carActions.deleteCar;
             return {
                 ...state,
                 showDeleteModal: true,
@@ -97,7 +97,7 @@ const carReducer = (state = initialState, action: Action) => {
         }
 
         case carActionTypes.DELETE_CAR_SUCCESS: {
-            const {id} = action as carActions.deleteCarSuccess;
+            const { id } = action as carActions.deleteCarSuccess;
 
             return {
                 ...state,
@@ -106,7 +106,7 @@ const carReducer = (state = initialState, action: Action) => {
         }
 
         case carActionTypes.FETCH_SINGLE_CAR_SUCCESS: {
-            const {car} = action as carActions.fetchSingleCarSuccess;
+            const { car } = action as carActions.fetchSingleCarSuccess;
 
             return {
                 ...state,
@@ -115,27 +115,27 @@ const carReducer = (state = initialState, action: Action) => {
         }
 
         case likeActionTypes.LIKE_ACTION_SUCCESS: {
-            const {incrementor, id} = action as likeActions.likeActionSuccess;
+            const { incrementor, id } = action as likeActions.likeActionSuccess;
 
             let selected;
-            if(state.selectedCar === null){
+            if (state.selectedCar === null) {
                 selected = null
             }
             else {
-                selected = {...state.selectedCar};
-                incrementor? selected.likes!++ : selected.dislikes!++; 
+                selected = { ...state.selectedCar };
+                incrementor ? selected.likes!++ : selected.dislikes!++;
             }
 
             return {
                 ...state,
-                cars: [...state.cars.map( car => {
-                    if (car.id === id){
-                        incrementor? car.likes!++ : car.dislikes!++
+                cars: [...state.cars.map(car => {
+                    if (car.id === id) {
+                        incrementor ? car.likes!++ : car.dislikes!++
                     }
 
                     return car;
-                })] ,
-                selectedCar: {...selected}
+                })],
+                selectedCar: { ...selected }
             }
         }
 

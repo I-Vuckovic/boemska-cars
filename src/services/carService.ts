@@ -1,31 +1,31 @@
 import * as routes from '../routes';
-import axios, { AxiosResponse }  from 'axios';
-import {Car} from '../models/Car';
-import {RefreshToken} from '../models/RefreshToken';
-import {userLogin} from './userService';
+import axios, { AxiosResponse } from 'axios';
+import { Car } from '../models/Car';
+import { RefreshToken } from '../models/RefreshToken';
+import { userLogin } from './userService';
 
 const headerWithToken = () => {
 
 	const headers = {
-    	'Content-type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-    }
+		'Content-type': 'application/json',
+		'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+	}
 	return headers;
-    
+
 }
 
-async function checkAuth(error : any){
+async function checkAuth(error: any) {
 
-	if (error.response.status === 401){
+	if (error.response.status === 401) {
 
-		const refreshToken : RefreshToken = {
+		const refreshToken: RefreshToken = {
 			client_id: 'test',
 			client_secret: 'secret',
 			grant_type: 'refresh_token',
 			refresh_token: `${localStorage.getItem('refresh_token')}`
 		}
 
-		const response : AxiosResponse = await userLogin(refreshToken);
+		const response: AxiosResponse = await userLogin(refreshToken);
 
 		if (response.status === 200) {
 			localStorage.setItem('access_token', response.data.access_token);
@@ -43,17 +43,17 @@ async function checkAuth(error : any){
 
 export async function fetchCars() {
 
-	try{
-		const response = await axios.get(routes.cars, {headers: headerWithToken()});
+	try {
+		const response = await axios.get(routes.cars, { headers: headerWithToken() });
 		return response;
 	}
-	catch(error){
+	catch (error) {
 		console.log(error)
 
 		const auth = await checkAuth(error);
 
-		if (auth){
-			const resposne = await axios.get(routes.cars, {headers: headerWithToken()});
+		if (auth) {
+			const resposne = await axios.get(routes.cars, { headers: headerWithToken() });
 			return resposne;
 		}
 
@@ -63,20 +63,20 @@ export async function fetchCars() {
 	//Prvobitno resenje sa promise-ima, nisam mogo da osmislim mehanizam za refresh token pa sam preso
 	//na async/await
 
-    // return axios.get(routes.cars, {
-    //     headers: headerWithToken()
-    // })
-    //     .then(response => response)
-    //     .catch(error => {
-    //     	console.log(error); 
-        	
-    //     	return errorHandler(error);
-    //     }
-    //     )
-    //     .then(response => {console.log(response); return null})
+	// return axios.get(routes.cars, {
+	//     headers: headerWithToken()
+	// })
+	//     .then(response => response)
+	//     .catch(error => {
+	//     	console.log(error); 
+
+	//     	return errorHandler(error);
+	//     }
+	//     )
+	//     .then(response => {console.log(response); return null})
 }
 
-export async function addCarRequest(car : Car) {
+export async function addCarRequest(car: Car) {
 	return axios({
 		method: 'POST',
 		headers: headerWithToken(),
@@ -86,10 +86,10 @@ export async function addCarRequest(car : Car) {
 }
 
 export async function addCar(car: Car) {
-	try{
+	try {
 		return await addCarRequest(car);
 	}
-	catch(error){
+	catch (error) {
 
 		const auth = await checkAuth(error);
 
@@ -101,7 +101,7 @@ export async function addCar(car: Car) {
 	}
 }
 
-export async function deleteCarRequest(id:number) {
+export async function deleteCarRequest(id: number) {
 	return axios({
 		method: 'DELETE',
 		headers: headerWithToken(),
@@ -110,10 +110,10 @@ export async function deleteCarRequest(id:number) {
 }
 
 export async function deleteCar(id: number) {
-	try{
+	try {
 		return await deleteCarRequest(id);
 	}
-	catch(error){
+	catch (error) {
 
 		const auth = await checkAuth(error);
 
@@ -125,24 +125,24 @@ export async function deleteCar(id: number) {
 	}
 }
 
-export async function fetchSingleCar(id :number) {
+export async function fetchSingleCar(id: number) {
 
-	try{
-		const response = await axios.get(`${routes.cars}${id}`, {headers: headerWithToken()})
+	try {
+		const response = await axios.get(`${routes.cars}${id}`, { headers: headerWithToken() })
 		return response;
 	}
-	catch(error){
+	catch (error) {
 
 		const auth = await checkAuth(error);
 
-		if (auth){
-			const resposne = await axios.get(`${routes.cars}${id}`, {headers: headerWithToken()})
+		if (auth) {
+			const resposne = await axios.get(`${routes.cars}${id}`, { headers: headerWithToken() })
 			return resposne;
 		}
 
 		return error
 	}
-}	
+}
 
 export async function likeCarRequest(route: string, id: number) {
 	return axios({
@@ -153,10 +153,10 @@ export async function likeCarRequest(route: string, id: number) {
 }
 
 export async function likeCar(route: string, id: number) {
-	try{
+	try {
 		return await likeCarRequest(route, id);
 	}
-	catch(error){
+	catch (error) {
 
 		const auth = await checkAuth(error);
 
